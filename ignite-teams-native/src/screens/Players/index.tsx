@@ -4,10 +4,13 @@ import { FlatList } from 'react-native';
 import { Container, Form, HeaderList, PlayerAmount } from './styles';
 
 import { Input } from '@components/Input';
+import { Filter } from '@components/Filter';
 import { Header } from '@components/Header';
+import { ListEmpty } from '@components/ListEmpty';
 import { Highlight } from '@components/Highlight';
 import { ButtonIcon } from '@components/ButtonIcon';
-import { Filter } from '@components/Filter';
+import { PlayerCard } from '@components/PlayerCard';
+import { Button } from '@components/Button';
 
 export function Players() {
   const [team, setTeam] = useState<string>('')
@@ -27,7 +30,6 @@ export function Players() {
           placeholder='Nome do participante'
           autoCorrect={false}
         />
-
         <ButtonIcon icon='add' />
       </Form>
 
@@ -49,6 +51,25 @@ export function Players() {
           {players.length}
         </PlayerAmount>
       </HeaderList>
+
+      <FlatList
+        data={players}
+        keyExtractor={item => item}
+        showsVerticalScrollIndicator={false}
+        ListEmptyComponent={() => <ListEmpty message='Não há pessoas nesse time.' />}
+        contentContainerStyle={[ { paddingBottom: 100 }, players.length === 0 && { flex: 1 } ]}
+        renderItem={({ item}) => (
+          <PlayerCard
+            name={item}
+            onRemove={() => {}}
+          />
+        )}
+      />
+
+      <Button
+        title='Remover Turma'
+        type='SECONDARY'
+      />
     </Container>
   )
 }
