@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { Groups } from '@screens/Groups'
 import { Loading } from '@components/Loading';
+import { NewGroup } from '@screens/NewGroup';
 
 export default function App() {
   const [loaded] =  useFonts({
@@ -20,7 +21,8 @@ export default function App() {
         barStyle='light-content'
         backgroundColor='transparent'
       />
-      { loaded ? <Groups /> : <Loading /> }
+      {/* { loaded ? <Groups /> : <Loading /> } */}
+      { loaded ? <NewGroup /> : <Loading /> }
     </ThemeProvider>
   );
 }

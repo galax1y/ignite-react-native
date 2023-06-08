@@ -10,7 +10,7 @@ import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
 
 export function Groups() {
-  const [groups, setGroups] = useState<string[]>([])
+  const [groups, setGroups] = useState<string[]>(['Turma 1', 'Turma 2'])
   return (
     <Container>
       <Header />
