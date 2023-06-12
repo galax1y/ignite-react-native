@@ -5,12 +5,16 @@ import { Container, Content, Icon } from './styles'
 import { Highlight } from '@components/Highlight'
 import { Button } from '@components/Button'
 import { Input } from '@components/Input'
+import { useState } from 'react'
 
 export function NewGroup() {
   const navigation = useNavigation()
+  const [group, setGroup] = useState<string>('')
 
   function handleNew() {
-    navigation.navigate('players', { group: 'Rocket'})
+    // Second parameter of Navigate is the data that will be sent to the target screen.
+    // In this case, sends this information to Players screen -> { group: <group state variable value> }
+    navigation.navigate('players', { group })
   }
 
   return (
@@ -25,7 +29,11 @@ export function NewGroup() {
           subtitle='crie a turma para adicionar as pessoas'
         />
 
-        <Input placeholder='Nome da turma' />
+        <Input
+          placeholder='Nome da turma'
+          onChangeText={setGroup}
+          value={group}
+        />
 
         <Button
           title='Criar'
