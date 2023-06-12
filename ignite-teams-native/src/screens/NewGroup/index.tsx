@@ -6,12 +6,14 @@ import { Highlight } from '@components/Highlight'
 import { Button } from '@components/Button'
 import { Input } from '@components/Input'
 import { useState } from 'react'
+import { groupCreate } from '@storage/group/group-create'
 
 export function NewGroup() {
   const navigation = useNavigation()
   const [group, setGroup] = useState<string>('')
 
-  function handleNew() {
+  async function handleNew() {
+    await groupCreate(group)
     // Second parameter of Navigate is the data that will be sent to the target screen.
     // In this case, sends this information to Players screen -> { group: <group state variable value> }
     navigation.navigate('players', { group })
