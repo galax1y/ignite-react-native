@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Alert, FlatList } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { Alert, FlatList, TextInput } from 'react-native';
 import { AppError } from '@utils/AppError';
 
 import { PlayerStorageDTO } from '@storage/player/player-storage-dto';
@@ -23,12 +23,14 @@ type RouteParams = {
 }
 
 export function Players() {
-  const [team, setTeam] = useState<string>('')
+  const [team, setTeam] = useState<string>('Time A')
   const [players, setPlayers] = useState<PlayerStorageDTO[]>([])
   const [newPlayerName, setNewPlayerName] = useState<string>('')
 
   const route = useRoute()
   const { group } = route.params as RouteParams
+
+  const newPlayerNameInputRef = useRef<TextInput>(null)
 
   async function handleAddPlayer() {
     if (newPlayerName.trim().length === 0) {
@@ -42,6 +44,11 @@ export function Players() {
 
     try {
       await playerAddByGroup(newPlayer, group)
+
+      setNewPlayerName('')
+
+      newPlayerNameInputRef.current?.blur()
+
       fetchPlayersByTeam()
     } catch (err) {
       if (err instanceof AppError) {
@@ -78,10 +85,13 @@ export function Players() {
 
       <Form>
         <Input
+          inputRef={newPlayerNameInputRef}
           placeholder='Nome do participante'
           autoCorrect={false}
+          onSubmitEditing={handleAddPlayer}
           onChangeText={setNewPlayerName}
           value={newPlayerName}
+          returnKeyType='done'
         />
         <ButtonIcon
           icon='add'
