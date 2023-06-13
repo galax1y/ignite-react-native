@@ -17,6 +17,7 @@ import { Highlight } from '@components/Highlight';
 import { ButtonIcon } from '@components/ButtonIcon';
 import { PlayerCard } from '@components/PlayerCard';
 import { useRoute } from '@react-navigation/native';
+import { playerRemoveByGroup } from '@storage/player/player-remove-by-group';
 
 type RouteParams = {
   group: string
@@ -58,6 +59,18 @@ export function Players() {
         Alert.alert('Nova pessoa', 'Não foi possível adicionar')
       }
     }
+  }
+
+  async function handleRemovePlayer(playerName: string) {
+    try {
+      await playerRemoveByGroup(playerName, group)
+
+      fetchPlayersByTeam()
+    } catch (err) {
+      console.log(err)
+      Alert.alert('Remover pessoa', 'Não foi possível remover essa pessoa.')
+    }
+
   }
 
   async function fetchPlayersByTeam() {
@@ -127,7 +140,7 @@ export function Players() {
         renderItem={({ item}) => (
           <PlayerCard
             name={item.name}
-            onRemove={() => {}}
+            onRemove={() => handleRemovePlayer(item.name)}
           />
         )}
       />
