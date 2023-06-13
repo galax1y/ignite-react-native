@@ -1,22 +1,37 @@
+import { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 
-import { Header } from '@components/Header'
-import { Container, Content, Icon } from './styles'
-import { Highlight } from '@components/Highlight'
-import { Button } from '@components/Button'
-import { Input } from '@components/Input'
-import { useState } from 'react'
 import { groupCreate } from '@storage/group/group-create'
+import { AppError } from '@utils/AppError'
+
+import { Input } from '@components/Input'
+import { Header } from '@components/Header'
+import { Button } from '@components/Button'
+import { Highlight } from '@components/Highlight'
+import { Container, Content, Icon } from './styles'
+import { Alert } from 'react-native'
 
 export function NewGroup() {
   const navigation = useNavigation()
   const [group, setGroup] = useState<string>('')
 
   async function handleNew() {
-    await groupCreate(group)
-    // Second parameter of Navigate is the data that will be sent to the target screen.
-    // In this case, sends this information to Players screen -> { group: <group state variable value> }
-    navigation.navigate('players', { group })
+    try {
+      if (group.trim().length === 0) {
+        return Alert.alert('Novo grupo', 'Informe o nome da turma.')
+      }
+
+      await groupCreate(group)
+      
+      navigation.navigate('players', { group })
+    } catch (err) {
+      if (err instanceof AppError) {
+        Alert.alert('Novo grupo', err.message)
+      } else {
+        Alert.alert('Novo grupo', 'Não foi possível criar um novo grupo.')
+        console.log(err)
+      }
+    }
   }
 
   return (
