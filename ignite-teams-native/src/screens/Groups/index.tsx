@@ -9,7 +9,7 @@ import { Button } from '@components/Button';
 import { GroupCard } from '@components/GroupCard';
 import { Highlight } from '@components/Highlight';
 import { ListEmpty } from '@components/ListEmpty';
-import { GroupGetAll } from '@storage/group/group-get-all';
+import { groupGetAll } from '@storage/group/group-get-all';
 
 export function Groups() {
   const [groups, setGroups] = useState<string[]>([])
@@ -26,7 +26,7 @@ export function Groups() {
 
   async function fetchGroups() {
     try {
-      const data = await GroupGetAll()
+      const data = await groupGetAll()
       setGroups(data)
     } catch (err) {
       console.error('Something went wrong.')
