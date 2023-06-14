@@ -25,7 +25,7 @@ export default {
     MD: 16,
     LG: 18,
     XL: 24,
-    // '2XL': 32,
+    XXL: 32,
   },
 
   FONT_FAMILY: {
