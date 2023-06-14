@@ -1,38 +1,43 @@
-import { useEffect, useRef, useState } from 'react';
-import { Alert, FlatList, TextInput } from 'react-native';
-import { AppError } from '@utils/AppError';
+import { useEffect, useRef, useState } from 'react'
+import { Alert, FlatList, TextInput } from 'react-native'
 
-import { PlayerStorageDTO } from '@storage/player/player-storage-dto';
-import { playerAddByGroup } from '@storage/player/player-add-by-group';
-import { playersGetByGroupAndTeam } from '@storage/player/player-get-by-group-and-team';
+import { AppError } from '@utils/AppError'
+import { useNavigation, useRoute } from '@react-navigation/native'
 
-import { Container, Form, HeaderList, PlayerAmount } from './styles';
+import { PlayerStorageDTO } from '@storage/player/player-storage-dto'
+import { playerAddByGroup } from '@storage/player/player-add-by-group'
+import { groupRemoveByName } from '@storage/group/group-remove-by-name'
+import { playerRemoveByGroup } from '@storage/player/player-remove-by-group'
+import { playersGetByGroupAndTeam } from '@storage/player/player-get-by-group-and-team'
 
-import { Input } from '@components/Input';
-import { Button } from '@components/Button';
-import { Filter } from '@components/Filter';
-import { Header } from '@components/Header';
-import { ListEmpty } from '@components/ListEmpty';
-import { Highlight } from '@components/Highlight';
-import { ButtonIcon } from '@components/ButtonIcon';
-import { PlayerCard } from '@components/PlayerCard';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { playerRemoveByGroup } from '@storage/player/player-remove-by-group';
-import { groupRemoveByName } from '@storage/group/group-remove-by-name';
+import { Container, Form, HeaderList, PlayerAmount } from './styles'
+
+import { Input } from '@components/Input'
+import { Button } from '@components/Button'
+import { Filter } from '@components/Filter'
+import { Header } from '@components/Header'
+import { Loading } from '@components/Loading'
+import { ListEmpty } from '@components/ListEmpty'
+import { Highlight } from '@components/Highlight'
+import { ButtonIcon } from '@components/ButtonIcon'
+import { PlayerCard } from '@components/PlayerCard'
 
 type RouteParams = {
   group: string
 }
 
 export function Players() {
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+
   const [team, setTeam] = useState<string>('Time A')
   const [players, setPlayers] = useState<PlayerStorageDTO[]>([])
   const [newPlayerName, setNewPlayerName] = useState<string>('')
 
-  const navigation = useNavigation()
   const route = useRoute()
   const { group } = route.params as RouteParams
-
+  
+  const navigation = useNavigation()
+  
   const newPlayerNameInputRef = useRef<TextInput>(null)
 
   async function handleAddPlayer() {
@@ -77,11 +82,15 @@ export function Players() {
 
   async function fetchPlayersByTeam() {
     try {
+      setIsLoading(true)
+
       const playersByTeam = await playersGetByGroupAndTeam(group, team)
       setPlayers(playersByTeam)
     } catch (err) {
       console.log(err)
       Alert.alert('Pessoas', 'Não foi possível carregar as pessoas do time selecionado')
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -98,7 +107,7 @@ export function Players() {
   async function handleRemoveGroup() {
     Alert.alert(
       'Remover',
-      'Deseja Remover o grupo?',
+      'Deseja remover a turma?',
       [
         { text: 'Não', style: 'cancel' },
         { text: 'Sim', onPress: () => groupRemove() }
@@ -136,19 +145,20 @@ export function Players() {
       </Form>
 
       <HeaderList>
-        <FlatList
-          data={['Time A', 'Time B']}
-          keyExtractor={item => item}
-          horizontal
-          renderItem={({ item }) => (
-            <Filter
-              title={item}
-              isActive={item === team}
-              onPress={() => setTeam(item)}
-            />
-          )}
-        />
-        
+        {isLoading ? <Loading /> :
+          <FlatList
+            data={['Time A', 'Time B']}
+            keyExtractor={item => item}
+            horizontal
+            renderItem={({ item }) => (
+              <Filter
+                title={item}
+                isActive={item === team}
+                onPress={() => setTeam(item)}
+              />
+            )}
+          />
+        }
         <PlayerAmount>
           {players.length}
         </PlayerAmount>

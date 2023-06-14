@@ -1,15 +1,15 @@
 import { useState } from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { Alert } from 'react-native'
 
-import { groupCreate } from '@storage/group/group-create'
 import { AppError } from '@utils/AppError'
+import { useNavigation } from '@react-navigation/native'
+import { groupCreate } from '@storage/group/group-create'
 
 import { Input } from '@components/Input'
 import { Header } from '@components/Header'
 import { Button } from '@components/Button'
 import { Highlight } from '@components/Highlight'
 import { Container, Content, Icon } from './styles'
-import { Alert } from 'react-native'
 
 export function NewGroup() {
   const navigation = useNavigation()
