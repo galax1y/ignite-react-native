@@ -19,6 +19,7 @@ import {
   NewMealWrapper,
   SectionHeader,
 } from './styles'
+import { useNavigation } from '@react-navigation/native'
 
 export function Home() {
   const data = [
@@ -83,6 +84,9 @@ export function Home() {
       ]
     }
   ]
+
+  const navigation = useNavigation()
+
   return (
     <Container>
       <Header>
@@ -95,7 +99,9 @@ export function Home() {
       </Header>
 
       <Content>
-        <StatsPreview />
+        <StatsPreview handlePress={() => {
+          navigation.navigate('stats')
+        }} />
 
         <NewMealWrapper>
           <NewMealText>Refeições</NewMealText>

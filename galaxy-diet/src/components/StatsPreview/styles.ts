@@ -28,7 +28,7 @@ ${({ theme }) => css`
   color: ${theme.COLORS.GRAY_1};
   font-size: ${theme.FONT_SIZES.XXL}px;
   font-family: ${theme.FONT_FAMILY.BOLD};
-`}
+`};
 `
 
 export const Span = styled.Text`
