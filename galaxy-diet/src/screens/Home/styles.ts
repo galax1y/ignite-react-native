@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const Container = styled(SafeAreaView)`
@@ -38,6 +38,25 @@ margin-top: 40px;
 gap: 8px;
 `
 
+export const NewMealText = styled.Text`
+${({ theme }) => css`
+  color: ${theme.COLORS.GRAY_1};
+  font-size: ${theme.FONT_SIZES.MD}px;
+  font-family: ${theme.FONT_FAMILY.REGULAR};
+`}
+`
+
 export const MealsOverview = styled.View`
 flex: 1;
+`
+
+export const SectionHeader = styled.Text`
+${({ theme }) => css`
+  color: ${theme.COLORS.GRAY_1};
+  font-size: ${theme.FONT_SIZES.LG}px;
+  font-family: ${theme.FONT_FAMILY.BOLD};
+`};
+
+margin-top: 32px;
+margin-bottom: 8px;
 `
