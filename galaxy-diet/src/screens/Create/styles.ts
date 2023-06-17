@@ -16,9 +16,10 @@ padding: 40px 24px;
 border-radius: 20px;
 
 background-color: ${({ theme }) => theme.COLORS.GRAY_7};
+justify-content: space-between;
 `
 
-export const Form = styled.View`
+export const Form = styled.ScrollView`
 flex: 1;
-gap: 24px;
+margin-bottom: 20px;
 `

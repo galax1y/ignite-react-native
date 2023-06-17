@@ -12,7 +12,10 @@ export function Create() {
       <CreateHeader />
 
       <Content>
-        <Form>
+        <Form
+          showsVerticalScrollIndicator
+          contentContainerStyle={{ rowGap: 24 }}
+        >
           <View>
             <Label text='Nome' />
             <Input />
