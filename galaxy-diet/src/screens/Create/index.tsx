@@ -9,7 +9,6 @@ import { useNavigation } from '@react-navigation/native';
 
 export function Create() {
   const navigation = useNavigation()
-  
   return (
     <Container>
       <CreateHeader />

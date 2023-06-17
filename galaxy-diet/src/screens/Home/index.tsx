@@ -125,7 +125,8 @@ export function Home() {
               return <MealCard {...item} />
             }}
             showsVerticalScrollIndicator={false}
-            fadingEdgeLength={200}
+            fadingEdgeLength={100}
+            style={{ marginBottom: 24 }}
           />
         </MealsOverview>
         {/* <MealsOverview>

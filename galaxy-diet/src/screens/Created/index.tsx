@@ -11,35 +11,36 @@ export function Created() {
 
   return (
     <Container>
-        <Box>
-          <Heading color={isOnDiet ? 'success' : 'fail'}>
-            {isOnDiet ? 'Continue assim!' : 'Que pena!'}
-          </Heading>
-          { isOnDiet ? 
-            (<Span>
-              Você continua{' '}
-              <Strong>dentro da dieta.{' '}</Strong>
-              Muito bem!
-            </Span>)
-            :
-            (<Span>
-              Você{' '}
-              <Strong>saiu da dieta{' '}</Strong>
-              dessa vez, mas continue se esforçando e não desista!
-            </Span>)
-          }
-        </Box>
+      <Box>
+        <Heading color={isOnDiet ? 'success' : 'fail'}>
+          {isOnDiet ? 'Continue assim!' : 'Que pena!'}
+        </Heading>
+        {
+        isOnDiet ? 
+          (<Span>
+            Você continua{' '}
+            <Strong>dentro da dieta.{' '}</Strong>
+            Muito bem!
+          </Span>)
+        :
+          (<Span>
+            Você{' '}
+            <Strong>saiu da dieta{' '}</Strong>
+            dessa vez, mas continue se esforçando e não desista!
+          </Span>)
+        }
+      </Box>
 
-        <Image
-          source={isOnDiet ? SuccessImage : failImage}
-          style={{marginBottom: 32}}
-        />
-        
-        <Button
-          title='Ir para a página inicial'
-          onPress={() => navigation.navigate('home')}
-          style={{ paddingHorizontal: 24 }}
-        />
+      <Image
+        source={isOnDiet ? SuccessImage : failImage}
+        style={{marginBottom: 32}}
+      />
+      
+      <Button
+        title='Ir para a página inicial'
+        onPress={() => navigation.navigate('home')}
+        style={{ paddingHorizontal: 24 }}
+      />
     </Container>
   )
 }
