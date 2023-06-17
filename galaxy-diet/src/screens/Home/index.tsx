@@ -105,7 +105,7 @@ export function Home() {
 
         <NewMealWrapper>
           <NewMealText>Refeições</NewMealText>
-          <ButtonIcon title='Nova Refeição'>
+          <ButtonIcon onPress={() => navigation.navigate('create')} title='Nova Refeição'>
             <Plus size={16} color={'#FFF'} />
           </ButtonIcon>
         </NewMealWrapper>

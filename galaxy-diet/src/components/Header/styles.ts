@@ -18,8 +18,10 @@ export const BackButton = styled.TouchableOpacity`
 position: absolute;
 top: 56px;
 left: 24px;
-color: ${({theme}) => theme.COLORS.RED_DARK}
+color: ${({theme}) => theme.COLORS.RED_DARK};
 `
+
+export const ArrowLeftIcon = styled(ArrowLeft)``
 
 export const Heading = styled.Text`
 ${({ theme }) => css`
@@ -36,5 +38,3 @@ ${({ theme }) => css`
   font-family: ${theme.FONT_FAMILY.REGULAR};
 `};
 `
-
-export const ArrowLeftIcon = styled(ArrowLeft)``

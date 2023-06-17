@@ -18,6 +18,7 @@ export function Header({ inDietPercentage }: HeaderProps) {
       >
         <ArrowLeftIcon
           color={isHealthy ? '#639339' : '#BF3B44'}
+          weight={'bold'}
           size={24}
         />
       </BackButton>
