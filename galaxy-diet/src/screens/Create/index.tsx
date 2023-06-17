@@ -1,17 +1,19 @@
 import { View } from 'react-native'
-import { Container, Content, Form } from './styles';
-import { CreateHeader } from '@components/CreateHeader';
-import { Input } from '@components/Input';
-import { Button } from '@components/Button';
-import { Label } from '@components/Label';
-import { ToggleButton } from '@components/ToggleButton';
-import { useNavigation } from '@react-navigation/native';
+import { Container, Content, Form } from './styles'
+import { useNavigation } from '@react-navigation/native'
+
+import { Label } from '@components/Label'
+import { Input } from '@components/Input'
+import { Button } from '@components/Button'
+import { Header } from '@components/Header'
+import { ToggleButton } from '@components/ToggleButton'
 
 export function Create() {
   const navigation = useNavigation()
+
   return (
     <Container>
-      <CreateHeader />
+      <Header />
 
       <Content>
         <Form
@@ -65,7 +67,6 @@ export function Create() {
           onPress={() => navigation.navigate('created')}
         />
       </Content>
-        
     </Container>
   )
 }

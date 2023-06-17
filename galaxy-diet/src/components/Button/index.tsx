@@ -8,7 +8,10 @@ type Props = TouchableOpacityProps & {
 
 export function Button({ title, ...props } : Props) {
   return (
-    <Container activeOpacity={0.7} {...props}>
+    <Container
+      activeOpacity={0.7}
+      {...props}
+    >
       <Title>{title}</Title>
     </Container>
   )

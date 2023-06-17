@@ -1,15 +1,10 @@
+import { ArrowLeft } from 'phosphor-react-native';
 import styled, { css } from 'styled-components/native';
-import { ArrowLeft } from 'phosphor-react-native'
 
-interface HeaderContainerStyleProps {
-  isHealthy?: boolean
-}
-
-export const Container = styled.View<HeaderContainerStyleProps>`
+export const Container = styled.View`
+background-color: ${({ theme }) => theme.COLORS.GRAY_5};
+height: 132px;
 width: 100%;
-height: 200px;
-background-color: ${({ isHealthy, theme}) => isHealthy ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT };
-
 align-items: center;
 justify-content: center;
 `
@@ -26,15 +21,7 @@ export const ArrowLeftIcon = styled(ArrowLeft)``
 export const Heading = styled.Text`
 ${({ theme }) => css`
   color: ${theme.COLORS.GRAY_1};
-  font-size: ${theme.FONT_SIZES.XXL}px;
+  font-size: ${theme.FONT_SIZES.LG}px;
   font-family: ${theme.FONT_FAMILY.BOLD};
-`};
-`
-
-export const Span = styled.Text`
-${({ theme }) => css`
-  color: ${theme.COLORS.GRAY_2};
-  font-size: ${theme.FONT_SIZES.SM}px;
-  font-family: ${theme.FONT_FAMILY.REGULAR};
 `};
 `

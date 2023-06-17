@@ -121,21 +121,18 @@ export function Home() {
                 {title}
               </SectionHeader>
             )}
-            renderItem={({item}) => {
-              return <MealCard {...item} />
+            renderItem={({ item }) => {
+              return (
+                <MealCard
+                  {...item}
+                />
+              )
             }}
             showsVerticalScrollIndicator={false}
             fadingEdgeLength={100}
             style={{ marginBottom: 24 }}
           />
         </MealsOverview>
-        {/* <MealsOverview>
-          <SectionList
-            sections={data}
-          >
-
-          </SectionList>
-        </MealsOverview> */}
       </Content>
     </Container>
   )

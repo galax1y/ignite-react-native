@@ -5,6 +5,18 @@ export declare global {
       stats: undefined
       create: undefined
       created: undefined
+      meal: {
+        name: string
+        description: string
+        time: string
+        isHealthy: boolean
+      }
+      edit: {
+        name: string
+        description: string
+        time: string
+        isHealthy: boolean
+      }
     }
   }
 }

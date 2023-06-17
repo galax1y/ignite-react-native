@@ -1,13 +1,13 @@
 import { View } from 'react-native'
 import { Container, Content, Title } from './styles';
-import { Header } from '@components/Header';
+import { PreviewHeader } from '@components/PreviewHeader';
 import { Keypoint } from '@components/Keypoint';
 
 export function Stats() {
   const inDietPercentage = 51.03
   return (
     <Container>
-      <Header inDietPercentage={inDietPercentage} />
+      <PreviewHeader inDietPercentage={inDietPercentage} />
         
       <Content>
         <Title>Estatísticas gerais</Title>
