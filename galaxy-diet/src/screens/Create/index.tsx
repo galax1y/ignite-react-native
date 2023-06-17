@@ -5,8 +5,11 @@ import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 import { Label } from '@components/Label';
 import { ToggleButton } from '@components/ToggleButton';
+import { useNavigation } from '@react-navigation/native';
 
 export function Create() {
+  const navigation = useNavigation()
+  
   return (
     <Container>
       <CreateHeader />
@@ -60,7 +63,7 @@ export function Create() {
 
         <Button
           title='Cadastrar refeição'
-          onPress={() => {}}
+          onPress={() => navigation.navigate('created')}
         />
       </Content>
         
