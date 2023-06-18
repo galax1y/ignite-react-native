@@ -1,4 +1,5 @@
 import { View } from 'react-native'
+import { useState } from 'react'
 import {
   Container,
   Content,
@@ -13,23 +14,32 @@ import {
 import { Header } from '@components/Header'
 import { Button } from '@components/Button'
 import { useNavigation, useRoute } from '@react-navigation/native'
+import { ButtonIcon } from '@components/ButtonIcon'
+import { Trash } from 'phosphor-react-native'
+import { DeleteModal } from '@components/DeleteModal'
 
-// interface MealProps {
-//   name: string
-//   time: string
-//   isHealthy: boolean
-// }
-// { name, time, isHealthy }: MealProps
+interface RouteParams {
+  name: string
+  description: string
+  time: string
+  isHealthy: boolean
+}
+
 export function Meal() {
   const navigation = useNavigation()
+  const [modalVisible, setModalVisible] = useState<boolean>(false)
 
   const route = useRoute()
-  const { name, description, time, isHealthy } = route.params
+  const { name, description, time, isHealthy } = route.params as RouteParams
 
   return (
     <Container>
       <Header title='Refeição' />
 
+      <DeleteModal
+        visibility={modalVisible}
+        setVisibility={setModalVisible}
+      />
       <Content>
         <View style={{gap: 8 }}>
           <Title>{name}</Title>
@@ -53,9 +63,16 @@ export function Meal() {
             title='Editar refeição'
             onPress={() => navigation.navigate('edit', { name, description, time, isHealthy })}
           />
-          <Button
+          <ButtonIcon
+            variant='outline'
             title='Excluir refeição'
-          />
+            onPress={() => setModalVisible(!modalVisible)}
+          >
+            <Trash
+              color={'#1B1D1E'}
+              size={22}
+            />
+          </ButtonIcon>
         </View>
       </Content>
     </Container>
