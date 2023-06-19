@@ -1,9 +1,11 @@
+import { TouchableOpacityProps } from 'react-native';
 import { Container, StatusIndicator, StyledText } from './styles';
 
-interface ToggleButtonProps {
+type ToggleButtonProps = TouchableOpacityProps & {
+  title: string
   mainColor: string
   backgroundColor: string
-  isSelected: boolean
+  state?: boolean
 }
 
 export function ToggleButton(props: ToggleButtonProps) {
@@ -14,7 +16,7 @@ export function ToggleButton(props: ToggleButtonProps) {
     >
       <StatusIndicator color={props.mainColor} />
       <StyledText>
-        Toggle
+        {props.title}
       </StyledText>
     </Container>
   )

@@ -12,6 +12,7 @@ export function DeleteModal({ visibility, setVisibility }: DeleteModalProps) {
       animationType='fade'
       visible={visibility}
       statusBarTranslucent
+      transparent
       onDismiss={() => setVisibility(!visibility)}
     >
       <Content>

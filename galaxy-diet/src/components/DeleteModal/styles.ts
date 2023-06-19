@@ -13,7 +13,7 @@ border-radius: 8px;
 min-height: 192px;
 max-height: 192px;
 
-border: 1px solid ${({ theme }) => theme.COLORS.GRAY_5};
+border: 1px solid ${({ theme }) => theme.COLORS.GRAY_6};
 background-color: ${({ theme }) => theme.COLORS.GRAY_6};
 `
 

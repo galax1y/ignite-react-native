@@ -1,15 +1,16 @@
 import styled, { css } from 'styled-components/native';
 
 interface ToggleButtonStyleProps {
+  title: string
   backgroundColor: string
   mainColor: string
-  isSelected: boolean
+  state?: boolean
 }
 
 export const Container = styled.TouchableOpacity<ToggleButtonStyleProps>`
-${({ backgroundColor, mainColor, isSelected, theme }) => css`
-  border: 1px solid ${ isSelected ? mainColor : theme.COLORS.GRAY_6 };
-  background-color: ${ isSelected ? backgroundColor : theme.COLORS.GRAY_6 }
+${({ backgroundColor, mainColor }) => css`
+  border: 1px solid ${mainColor};
+  background-color: ${backgroundColor};
 `};
 
 flex-direction: row;

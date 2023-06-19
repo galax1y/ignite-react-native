@@ -4,7 +4,9 @@ export declare global {
       home: undefined
       stats: undefined
       create: undefined
-      created: undefined
+      created: {
+        isOnDiet: boolean
+      }
       meal: {
         name: string
         description: string
