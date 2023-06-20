@@ -9,7 +9,7 @@ max-height: 48px;
 
 border: 1px solid ${({ theme }) => theme.COLORS.GRAY_5};
 border-radius: 6px;
-padding: 16px;
+padding: 0 16px;
 
 ${({ theme }) => css`
   color: ${theme.COLORS.GRAY_1};

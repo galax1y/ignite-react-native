@@ -3,16 +3,17 @@ import { Container, Meal, StatusIndicator, Timestamp, TimestampText } from './st
 
 interface MealCardProps {
   name: string
+  description: string
   time: string
   isHealthy: boolean
 }
 
-export function MealCard({ name, time, isHealthy }: MealCardProps) {
+export function MealCard({ name, description, time, isHealthy }: MealCardProps) {
   const navigation = useNavigation()
   
   return (
     <Container
-      onPress={() => navigation.navigate('meal', { name, time, isHealthy })}
+      onPress={() => navigation.navigate('meal', { name, description, time, isHealthy })}
       activeOpacity={0.6}
     >
       <Timestamp>

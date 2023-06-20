@@ -1,4 +1,4 @@
-import { SectionList, View } from 'react-native'
+import { Alert, SectionList, View } from 'react-native'
 
 import logo from '@assets/logo.png'
 import avatar from '@assets/avatar.png'
@@ -20,70 +20,98 @@ import {
   SectionHeader,
 } from './styles'
 import { useNavigation } from '@react-navigation/native'
+import { useEffect, useState } from 'react'
+import { dayGetAll } from '@storage/day/day-get-all'
+import { DayProps } from 'src/@types/storage'
 
 export function Home() {
-  const data = [
-    {
-      title: 'Primeiro',
-      data: [
-        {
-          time: '19:00',
-          name: 'X-tudo',
-          isHealthy: false,
-        },
-        {
-          time: '18:00',
-          name: 'Sushi',
-          isHealthy: true,
-        },
-      ],
-    },
-    {
-      title: 'Segundo',
-      data: [
-        {
-          time: '20:00',
-          name: 'X-Nada',
-          isHealthy: true,
-        },
-        {
-          time: '14:00',
-          name: 'Temaki',
-          isHealthy: false,
-        },
-      ]
-    },
-    {
-      title: 'Terceiro',
-      data: [
-        {
-          time: '20:00',
-          name: 'X-Vento',
-          isHealthy: true,
-        },
-        {
-          time: '14:00',
-          name: 'Hot',
-          isHealthy: false,
-        },
-      ]
-    },
-    {
-      title: 'Quarto',
-      data: [
-        {
-          time: '15:00',
-          name: 'X-Algo',
-          isHealthy: true,
-        },
-        {
-          time: '11:00',
-          name: 'Uramaki',
-          isHealthy: false,
-        },
-      ]
+  // const data = [
+  //   {
+  //     day: 'Primeiro',
+  //     data: [
+  //       {
+  //         time: '19:00',
+  //         name: 'X-tudo',
+  //         isHealthy: false,
+  //         description: '',
+  //       },
+  //       {
+  //         time: '18:00',
+  //         name: 'Sushi',
+  //         isHealthy: true,
+  //         description: '',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     day: 'Segundo',
+  //     data: [
+  //       {
+  //         time: '20:00',
+  //         name: 'X-Nada',
+  //         isHealthy: true,
+  //         description: '',
+  //       },
+  //       {
+  //         time: '14:00',
+  //         name: 'Temaki',
+  //         isHealthy: false,
+  //         description: '',
+  //       },
+  //     ]
+  //   },
+  //   {
+  //     day: 'Terceiro',
+  //     data: [
+  //       {
+  //         time: '20:00',
+  //         name: 'X-Vento',
+  //         isHealthy: true,
+  //         description: '',
+  //       },
+  //       {
+  //         time: '14:00',
+  //         name: 'Hot',
+  //         isHealthy: false,
+  //         description: '',
+  //       },
+  //     ]
+  //   },
+  //   {
+  //     day: 'Quarto',
+  //     data: [
+  //       {
+  //         time: '15:00',
+  //         name: 'X-Algo',
+  //         isHealthy: true,
+  //         description: '',
+  //       },
+  //       {
+  //         time: '11:00',
+  //         name: 'Uramaki',
+  //         isHealthy: false,
+  //         description: '',
+  //       },
+  //     ]
+  //   }
+  // ]
+
+  const [data, setData] = useState<DayProps[]>([])
+
+  async function fetchData() {
+    try {
+      const days = await dayGetAll() 
+      setData(days)
+    } catch (err) {
+      console.log(err)
+      Alert.alert('Something went wrong.')
     }
-  ]
+
+  }
+
+  useEffect(() => {
+    fetchData()
+  })
 
   const navigation = useNavigation()
 
@@ -116,9 +144,9 @@ export function Home() {
             sections={data}
             keyExtractor={item => item.name}
             ItemSeparatorComponent={() => <View style={{ marginTop: 20 }} />}
-            renderSectionHeader={({section: {title}}) => (
+            renderSectionHeader={({section: { day }}) => (
               <SectionHeader>
-                {title}
+                {day.getDate()}
               </SectionHeader>
             )}
             renderItem={({ item }) => {

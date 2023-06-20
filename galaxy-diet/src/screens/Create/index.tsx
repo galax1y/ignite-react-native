@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Alert, View } from 'react-native'
+import { useRef, useState } from 'react'
+import { Alert, TextInput, Touchable, TouchableOpacity, View } from 'react-native'
 import { Container, Content, Form } from './styles'
 import { useNavigation } from '@react-navigation/native'
 
@@ -8,16 +8,55 @@ import { Input } from '@components/Input'
 import { Button } from '@components/Button'
 import { Header } from '@components/Header'
 import { ToggleButton } from '@components/ToggleButton'
+import DateTimePicker from '@react-native-community/datetimepicker'
 
 export function Create() {
   const navigation = useNavigation()
 
+  const [date, setDate] = useState<Date>(new Date())
+  const [time, setTime] = useState<Date>(new Date())
+  const [showDatePicker, setShowDatePicker] = useState<boolean>(false)
+  const [showHourPicker, setShowHourPicker] = useState<boolean>(false)
+
+  const formattedDate = String(date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getUTCFullYear())
+  const formattedTime = String(time.getHours() + ':' + time.getMinutes())
+
+  const toggleDatePicker = () => {
+    setShowDatePicker(!showDatePicker)
+  }
+
+  const toggleHourPicker = () => {
+    setShowHourPicker(!showHourPicker)
+  }
+
+  const onDateChange = (event: any, selectedDate: any) => {
+    if (event.type === 'set') {
+      const currentDate = selectedDate
+      setDate(currentDate)
+      toggleDatePicker()
+    }
+    if (event.type === 'dismissed') {
+      toggleDatePicker()
+    }
+  }
+
+  const onHourChange = (event: any, selectedHour: any) => {
+    if (event.type === 'set') {
+      const currentHour = selectedHour
+      setTime(currentHour)
+      toggleHourPicker()
+    }
+    if (event.type === 'dismissed') {
+      toggleHourPicker()
+    }
+  }
   
   function handleCreateMeal() {
     if (radioButtonState === undefined) {
       return Alert.alert('Ops...', 'Preencha todos os campos para continuar.')
     }
-    navigation.navigate('created', { isOnDiet: Boolean(radioButtonState)})
+    console.log(date)
+    // navigation.navigate('created', { isOnDiet: Boolean(radioButtonState)})
   }
   
   const [radioButtonState, setRadioButtonState] = useState<boolean | undefined>(undefined)
@@ -60,11 +99,37 @@ export function Create() {
           <View style={{ flexDirection: 'row', gap: 20 }}>
             <View style={{flex: 1}}>
                 <Label text='Data' />
-                <Input />
+                {showDatePicker && 
+                  <DateTimePicker
+                    mode='date'
+                    display='default'
+                    value={date}
+                    onChange={onDateChange}
+                  />
+                }
+                <TouchableOpacity onPress={toggleDatePicker}>
+                  <Input
+                    value={formattedDate}
+                    editable={false}
+                  />
+                </TouchableOpacity>
               </View>
               <View style={{flex: 1}}>
                 <Label text='Hora' />
-                <Input />
+                {showHourPicker &&
+                  <DateTimePicker
+                    mode='time'
+                    display='default'
+                    value={time}
+                    onChange={onHourChange} 
+                  />
+                }
+                <TouchableOpacity onPress={toggleHourPicker}>
+                  <Input
+                    value={formattedTime}
+                    editable={false}
+                  />
+                </TouchableOpacity>
               </View>
           </View>
 
