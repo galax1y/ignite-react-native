@@ -1,17 +1,22 @@
-import { StatusBar, Text, View } from 'react-native'
+import { StatusBar, Text } from 'react-native'
+import { NativeBaseProvider } from 'native-base'
 import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto'
+
+import { THEME } from './src/theme';
+import { Loading } from '@components/loading';
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold })
 
   return (
-    <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+    <NativeBaseProvider theme={THEME}>
       <StatusBar
         barStyle={'light-content'}
         backgroundColor={'transparent'}
         translucent
       />
-      <Text style={{ fontFamily: 'Roboto_700Bold'}}>{fontsLoaded ? 'Ignite Gym' : 'Did not load font'}</Text>
-    </View>
+
+      { !fontsLoaded ? <Text>'Ignite Gyms'</Text> : <Loading /> }
+    </NativeBaseProvider>
   );
 }
