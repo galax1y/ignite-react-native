@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native'
+import { StatusBar, Text, View } from 'react-native'
 import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto'
 
 export default function App() {
@@ -6,6 +6,11 @@ export default function App() {
 
   return (
     <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+      <StatusBar
+        barStyle={'light-content'}
+        backgroundColor={'transparent'}
+        translucent
+      />
       <Text style={{ fontFamily: 'Roboto_700Bold'}}>{fontsLoaded ? 'Ignite Gym' : 'Did not load font'}</Text>
     </View>
   );
